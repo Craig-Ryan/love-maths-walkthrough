@@ -25,11 +25,11 @@ document.addEventListener("DOMContentLoaded", function() {
 */
 
 function runGame(gameType) {
-    let num1 = Math.floor(Math.random() * 25) + 1;
+    let num1 = Math.floor(Math.random() * 25) + 1; // +1 so as to not get any 0s
     let num2 = Math.floor(Math.random() * 25) + 1;
 
     if (gameType === "addition"){
-        displayAdditionQuestion(num1, num2);
+        displayAdditionQuestion(num1, num2); // Displays new number operands when addition is clicked
     } else {
         alert(`Unknown game type: ${gameType}`);
         throw `Unknown game type: ${gameType}. Aborting!`; //Throws err message to the console
@@ -41,8 +41,22 @@ function checkAnswer() {
 
 }
 
+/**
+ * Gets the operands (numbers) and the operator (+, -, *, /)
+ * directly from the DOM, and returns the correct answer.
+ */
 function calculateCorrectAnswer() {
 
+    let operand1 = parseInt(document.getElementById('operand1').innerText);
+    let operand2 = parseInt(document.getElementById('operand2').innerText);
+    let operator = document.getElementById('operator').innerText;
+
+    if (operator === '+'){
+        return [operand1, operand2, "addition"];
+    } else {
+        alert(`Unimplemented operator ${operator}`);
+        throw `Unimplemented operator ${operator}. Aborting!`;
+    }
 }
 
 function incrementScore() {
